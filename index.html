@@ -740,9 +740,14 @@
   /* CURSOR */
   const cursor=document.getElementById('cursor');
   const ring=document.getElementById('cursorRing');
-  let cx=0,cy=0,rx=0,ry=0;
+  let cx=0,cy=0,rx=0,ry=0,rafId=null;
+  function cursorTick(){rx+=(cx-rx)*.12;ry+=(cy-ry)*.12;ring.style.left=rx-18+'px';ring.style.top=ry-18+'px';rafId=requestAnimationFrame(cursorTick);}
   document.addEventListener('mousemove',e=>{cx=e.clientX;cy=e.clientY;cursor.style.left=cx-4+'px';cursor.style.top=cy-4+'px';});
-  (function aC(){rx+=(cx-rx)*.12;ry+=(cy-ry)*.12;ring.style.left=rx-18+'px';ring.style.top=ry-18+'px';requestAnimationFrame(aC);})();
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden){cancelAnimationFrame(rafId);rafId=null;gsap.globalTimeline.pause();}
+    else{cursorTick();gsap.globalTimeline.resume();}
+  });
+  cursorTick();
   document.querySelectorAll('a,button,.service-card,.team-card,.gallery-item').forEach(el=>{
     el.addEventListener('mouseenter',()=>{cursor.style.transform='scale(2.5)';ring.style.transform='scale(1.4)';ring.style.borderColor='rgba(0,87,231,.8)';});
     el.addEventListener('mouseleave',()=>{cursor.style.transform='';ring.style.transform='';ring.style.borderColor='rgba(0,87,231,.5)';});
