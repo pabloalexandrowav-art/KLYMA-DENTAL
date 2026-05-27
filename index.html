@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="assets/hero.jpg">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
@@ -371,7 +372,7 @@
   <!-- HERO -->
   <section id="hero-scroll">
     <div id="hero-sticky">
-      <img id="hero-bg" src="assets/hero.jpg" alt="Klyma Dental">
+      <img id="hero-bg" src="assets/hero.jpg" fetchpriority="high" alt="Klyma Dental">
       <div class="hero-overlay"></div>
       <div class="hero-load-bar" id="heroLoadBar"></div>
 
@@ -410,11 +411,11 @@
       <p class="section-sub">Instalaciones de última generación en el corazón de Santiago</p>
     </div>
     <div class="gallery-grid">
-      <div class="gallery-item reveal"><img src="assets/gallery-1.jpg" alt="Interior clínica"><div class="gallery-overlay"><span>Sala de tratamiento principal</span></div></div>
-      <div class="gallery-item reveal"><img src="assets/gallery-2.jpg" alt="Equipamiento"><div class="gallery-overlay"><span>Recepción premium</span></div></div>
-      <div class="gallery-item reveal"><img src="assets/gallery-3.jpg" alt="Tecnología"><div class="gallery-overlay"><span>Tecnología de vanguardia</span></div></div>
-      <div class="gallery-item reveal"><img src="assets/gallery-4.jpg" alt="Atención"><div class="gallery-overlay"><span>Atención personalizada</span></div></div>
-      <div class="gallery-item reveal"><img src="assets/gallery-5.jpg" alt="Equipamiento especializado"><div class="gallery-overlay"><span>Equipamiento esterilizado</span></div></div>
+      <div class="gallery-item reveal"><img loading="lazy" decoding="async" src="assets/gallery-1.jpg" alt="Interior clínica"><div class="gallery-overlay"><span>Sala de tratamiento principal</span></div></div>
+      <div class="gallery-item reveal"><img loading="lazy" decoding="async" src="assets/gallery-2.jpg" alt="Equipamiento"><div class="gallery-overlay"><span>Recepción premium</span></div></div>
+      <div class="gallery-item reveal"><img loading="lazy" decoding="async" src="assets/gallery-3.jpg" alt="Tecnología"><div class="gallery-overlay"><span>Tecnología de vanguardia</span></div></div>
+      <div class="gallery-item reveal"><img loading="lazy" decoding="async" src="assets/gallery-4.jpg" alt="Atención"><div class="gallery-overlay"><span>Atención personalizada</span></div></div>
+      <div class="gallery-item reveal"><img loading="lazy" decoding="async" src="assets/gallery-5.jpg" alt="Equipamiento especializado"><div class="gallery-overlay"><span>Equipamiento esterilizado</span></div></div>
     </div>
   </section>
 
@@ -428,7 +429,7 @@
     <div class="services-grid">
       <div class="service-card reveal" style="position:relative">
         <div class="card-arrow">↗</div>
-        <img class="service-img" src="assets/service-ortodoncia.jpg" alt="Ortodoncia invisible">
+        <img loading="lazy" decoding="async" class="service-img" src="assets/service-ortodoncia.jpg" alt="Ortodoncia invisible">
         <div class="service-body">
           <div class="service-icon">🦷</div>
           <h3>Ortodoncia Invisible</h3>
@@ -438,7 +439,7 @@
       </div>
       <div class="service-card featured reveal" style="position:relative">
         <div class="card-arrow">↗</div>
-        <img class="service-img" src="assets/service-blanqueamiento.jpg" alt="Blanqueamiento">
+        <img loading="lazy" decoding="async" class="service-img" src="assets/service-blanqueamiento.jpg" alt="Blanqueamiento">
         <div class="service-body">
           <div class="service-icon">✨</div>
           <h3>Blanqueamiento Láser</h3>
@@ -448,7 +449,7 @@
       </div>
       <div class="service-card reveal" style="position:relative">
         <div class="card-arrow">↗</div>
-        <img class="service-img" src="assets/service-carillas.jpg" alt="Carillas">
+        <img loading="lazy" decoding="async" class="service-img" src="assets/service-carillas.jpg" alt="Carillas">
         <div class="service-body">
           <div class="service-icon">💎</div>
           <h3>Carillas de Porcelana</h3>
@@ -458,7 +459,7 @@
       </div>
       <div class="service-card reveal" style="position:relative">
         <div class="card-arrow">↗</div>
-        <img class="service-img" src="assets/service-implantes.jpg" alt="Implantes">
+        <img loading="lazy" decoding="async" class="service-img" src="assets/service-implantes.jpg" alt="Implantes">
         <div class="service-body">
           <div class="service-icon">🔬</div>
           <h3>Implantes Dentales</h3>
@@ -468,7 +469,7 @@
       </div>
       <div class="service-card reveal" style="position:relative">
         <div class="card-arrow">↗</div>
-        <img class="service-img" src="assets/service-limpieza.jpg" alt="Limpieza">
+        <img loading="lazy" decoding="async" class="service-img" src="assets/service-limpieza.jpg" alt="Limpieza">
         <div class="service-body">
           <div class="service-icon">🛡️</div>
           <h3>Limpieza Profunda</h3>
@@ -478,7 +479,7 @@
       </div>
       <div class="service-card reveal" style="position:relative">
         <div class="card-arrow">↗</div>
-        <img class="service-img" src="assets/service-pediatria.jpg" alt="Odontopediatría">
+        <img loading="lazy" decoding="async" class="service-img" src="assets/service-pediatria.jpg" alt="Odontopediatría">
         <div class="service-body">
           <div class="service-icon">👶</div>
           <h3>Odontopediatría</h3>
@@ -493,9 +494,9 @@
   <section id="about">
     <div class="about-inner">
       <div class="about-visual reveal-left">
-        <img class="about-img-main" src="assets/about-main.jpg" alt="Clínica Klyma Dental">
-        <img class="about-img-small" src="assets/about-small1.jpg" alt="Dentista">
-        <img class="about-img-small2" src="assets/about-small2.jpg" alt="Tecnología">
+        <img loading="lazy" decoding="async" class="about-img-main" src="assets/about-main.jpg" alt="Clínica Klyma Dental">
+        <img loading="lazy" decoding="async" class="about-img-small" src="assets/about-small1.jpg" alt="Dentista">
+        <img loading="lazy" decoding="async" class="about-img-small2" src="assets/about-small2.jpg" alt="Tecnología">
         <div class="about-badge"><div class="num">+15</div><div class="txt">años de<br>excelencia</div></div>
       </div>
       <div class="about-content reveal-right">
@@ -524,19 +525,19 @@
     </div>
     <div class="team-grid">
       <div class="team-card reveal">
-        <img class="team-img" src="assets/team-andres.jpg" alt="Dr. Andrés Vega">
+        <img loading="lazy" decoding="async" class="team-img" src="assets/team-andres.jpg" alt="Dr. Andrés Vega">
         <div class="team-info"><div class="team-role">Director Médico</div><div class="team-name">Dr. Andrés Vega</div><div class="team-exp">Implantología · 18 años de exp.</div></div>
       </div>
       <div class="team-card reveal">
-        <img class="team-img" src="assets/team-catalina.jpg" alt="Dra. Catalina Ríos">
+        <img loading="lazy" decoding="async" class="team-img" src="assets/team-catalina.jpg" alt="Dra. Catalina Ríos">
         <div class="team-info"><div class="team-role">Ortodoncista</div><div class="team-name">Dra. Catalina Ríos</div><div class="team-exp">Invisalign · 12 años de exp.</div></div>
       </div>
       <div class="team-card reveal">
-        <img class="team-img" src="assets/team-felipe.jpg" alt="Dr. Felipe Soto">
+        <img loading="lazy" decoding="async" class="team-img" src="assets/team-felipe.jpg" alt="Dr. Felipe Soto">
         <div class="team-info"><div class="team-role">Estética Dental</div><div class="team-name">Dr. Felipe Soto</div><div class="team-exp">Carillas · 10 años de exp.</div></div>
       </div>
       <div class="team-card reveal">
-        <img class="team-img" src="assets/team-mariana.jpg" alt="Dra. Mariana Torres">
+        <img loading="lazy" decoding="async" class="team-img" src="assets/team-mariana.jpg" alt="Dra. Mariana Torres">
         <div class="team-info"><div class="team-role">Odontopediatra</div><div class="team-name">Dra. Mariana Torres</div><div class="team-exp">Pediatría · 9 años de exp.</div></div>
       </div>
     </div>
@@ -551,7 +552,7 @@
         <p class="section-sub">Invertimos en lo mejor para que tu tratamiento sea preciso y cómodo</p>
       </div>
       <div class="tech-top">
-        <div class="tech-img-wrap reveal-left"><img src="assets/tech-main.jpg" alt="Tecnología dental"></div>
+        <div class="tech-img-wrap reveal-left"><img loading="lazy" decoding="async" src="assets/tech-main.jpg" alt="Tecnología dental"></div>
         <div class="tech-list reveal-right">
           <div class="tech-item"><div class="tech-item-icon">🖥️</div><div><h3>Escáner 3D Intraoral</h3><p>Mapeo digital de tu boca en segundos. Sin moldes incómodos.</p></div></div>
           <div class="tech-item"><div class="tech-item-icon">📡</div><div><h3>Radiografía Digital</h3><p>90% menos radiación con imágenes HD al instante.</p></div></div>
@@ -577,17 +578,17 @@
     </div>
     <div class="results-grid">
       <div class="result-card reveal">
-        <div class="result-imgs"><img src="assets/result-blanq-antes.jpg" alt="Antes"><img src="assets/result-blanq-despues.jpg" alt="Después"></div>
+        <div class="result-imgs"><img loading="lazy" decoding="async" src="assets/result-blanq-antes.jpg" alt="Antes"><img loading="lazy" decoding="async" src="assets/result-blanq-despues.jpg" alt="Después"></div>
         <div class="result-divider"></div><div class="result-label">VS</div>
         <div class="result-info"><h4>Blanqueamiento Láser</h4><p>8 tonos más blanco · 1 sesión · 60 min</p></div>
       </div>
       <div class="result-card reveal">
-        <div class="result-imgs"><img src="assets/result-carillas-antes.jpg" alt="Antes"><img src="assets/result-carillas-despues.jpg" alt="Después"></div>
+        <div class="result-imgs"><img loading="lazy" decoding="async" src="assets/result-carillas-antes.jpg" alt="Antes"><img loading="lazy" decoding="async" src="assets/result-carillas-despues.jpg" alt="Después"></div>
         <div class="result-divider"></div><div class="result-label">VS</div>
         <div class="result-info"><h4>Carillas de Porcelana</h4><p>Transformación completa · 2 sesiones</p></div>
       </div>
       <div class="result-card reveal">
-        <div class="result-imgs"><img src="assets/result-ortod-antes.jpg" alt="Antes"><img src="assets/result-ortod-despues.jpg" alt="Después"></div>
+        <div class="result-imgs"><img loading="lazy" decoding="async" src="assets/result-ortod-antes.jpg" alt="Antes"><img loading="lazy" decoding="async" src="assets/result-ortod-despues.jpg" alt="Después"></div>
         <div class="result-divider"></div><div class="result-label">VS</div>
         <div class="result-info"><h4>Ortodoncia Invisible</h4><p>12 meses · Sin brackets visibles</p></div>
       </div>
@@ -604,17 +605,17 @@
       <div class="testimonial-card reveal">
         <div class="stars">★★★★★</div>
         <p class="testimonial-text">"Me hicieron las carillas y quedé absolutamente encantada. El resultado es natural y precioso. El equipo explica todo con mucha paciencia."</p>
-        <div class="testimonial-author"><img class="author-avatar" src="assets/avatar-valentina.jpg" alt=""><div><div class="author-name">Valentina Morales</div><div class="author-role">Carillas de Porcelana</div></div></div>
+        <div class="testimonial-author"><img loading="lazy" decoding="async" class="author-avatar" src="assets/avatar-valentina.jpg" alt=""><div><div class="author-name">Valentina Morales</div><div class="author-role">Carillas de Porcelana</div></div></div>
       </div>
       <div class="testimonial-card reveal">
         <div class="stars">★★★★★</div>
         <p class="testimonial-text">"Llevaba años con miedo al dentista. En Klyma me trataron con tanta paciencia que ya no le tengo miedo. El blanqueamiento quedó increíble."</p>
-        <div class="testimonial-author"><img class="author-avatar" src="assets/avatar-carlos.jpg" alt=""><div><div class="author-name">Carlos Rodríguez</div><div class="author-role">Blanqueamiento Láser</div></div></div>
+        <div class="testimonial-author"><img loading="lazy" decoding="async" class="author-avatar" src="assets/avatar-carlos.jpg" alt=""><div><div class="author-name">Carlos Rodríguez</div><div class="author-role">Blanqueamiento Láser</div></div></div>
       </div>
       <div class="testimonial-card reveal">
         <div class="stars">★★★★★</div>
         <p class="testimonial-text">"El implante fue mucho mejor de lo esperado. Sin dolor, recuperación rápida y no lo distingo del diente natural. ¡100% recomendado!"</p>
-        <div class="testimonial-author"><img class="author-avatar" src="assets/avatar-andrea.jpg" alt=""><div><div class="author-name">Andrea López</div><div class="author-role">Implante Dental</div></div></div>
+        <div class="testimonial-author"><img loading="lazy" decoding="async" class="author-avatar" src="assets/avatar-andrea.jpg" alt=""><div><div class="author-name">Andrea López</div><div class="author-role">Implante Dental</div></div></div>
       </div>
     </div>
   </section>
