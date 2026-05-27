@@ -7,7 +7,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
@@ -51,6 +50,17 @@
       box-shadow: 0 2px 24px rgba(0,40,120,0.08);
       border-bottom: 1px solid var(--border);
     }
+    nav.nav-dark {
+      background: transparent;
+      border-bottom: 1px solid transparent;
+      box-shadow: none;
+      padding: 22px 64px;
+    }
+    nav.nav-dark .logo { background: linear-gradient(135deg,#fff,#90caf9); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    nav.nav-dark .nav-links a { color: rgba(255,255,255,0.8); }
+    nav.nav-dark .nav-links a:hover { color: #fff; }
+    nav.nav-dark .nav-cta { background: rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.35); color:#fff; box-shadow:none; }
+    nav.nav-dark .nav-cta:hover { background: rgba(255,255,255,0.25); }
     .logo {
       font-size: 1.4rem; font-weight: 800; letter-spacing: 2px;
       background: linear-gradient(135deg,var(--blue),var(--cyan));
@@ -69,91 +79,70 @@
     }
     .nav-cta:hover { background: #0048c7; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,87,231,0.4); }
 
-    /* ── HERO ── */
-    #hero {
-      position: relative; min-height: 100vh;
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 60px; align-items: center;
-      padding: 120px 64px 80px;
-      background: linear-gradient(135deg, var(--bg) 0%, #e8f0ff 100%);
-      overflow: hidden;
+    /* ── VIDEO HERO ── */
+    #hero-scroll { height: 350vh; position: relative; }
+    #hero-sticky {
+      position: sticky; top: 0; height: 100vh; overflow: hidden;
     }
-    canvas#particles { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:0; }
-    .hero-left { position:relative; z-index:2; }
-
+    #hero-bg {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; display: block; transform-origin: center center;
+      will-change: transform;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(0,5,30,0.72) 0%, rgba(0,30,80,0.52) 60%, rgba(0,60,140,0.28) 100%);
+      z-index: 1;
+    }
+    .hero-load-bar {
+      position: absolute; bottom: 0; left: 0; height: 3px; width: 0%;
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+      z-index: 10; transition: width 0.2s, opacity 0.6s;
+    }
+    .hero-content {
+      position: absolute; inset: 0; z-index: 2;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 120px 80px 80px; max-width: 820px;
+    }
     .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
-      padding: 6px 16px; background: rgba(0,87,231,0.08);
-      border: 1px solid rgba(0,87,231,0.2); border-radius: 50px;
-      font-size: 0.72rem; font-weight: 600; color: var(--blue);
+      padding: 6px 16px; background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.28); border-radius: 50px;
+      font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.9);
       letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 24px;
+      width: fit-content;
     }
     .hero-badge .dot { width:6px;height:6px;background:#00c853;border-radius:50%;animation:pulse 2s infinite; }
-
     h1 {
-      font-size: clamp(2.8rem,5.5vw,5rem);
+      font-size: clamp(2.8rem,5.5vw,5.2rem);
       font-weight: 900; line-height: 1.05; letter-spacing: -2px;
-      color: var(--text); margin-bottom: 12px;
+      color: #fff; margin-bottom: 12px;
     }
-    .hero-accent { background: linear-gradient(135deg,var(--blue),var(--cyan)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
-    .hero-sub { font-size: clamp(1rem,2vw,1.3rem); color: var(--text2); margin-bottom: 10px; font-weight: 400; }
-    .hero-desc { font-size: clamp(.85rem,1.3vw,1rem); color: var(--text3); line-height: 1.7; margin-bottom: 28px; max-width: 480px; }
+    .hero-accent { background: linear-gradient(135deg,#60a5fa,#38bdf8); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+    .hero-sub { font-size: clamp(1rem,2vw,1.3rem); color: rgba(255,255,255,0.85); margin-bottom: 10px; font-weight: 400; }
+    .hero-desc { font-size: clamp(.85rem,1.3vw,1rem); color: rgba(255,255,255,0.62); line-height: 1.7; margin-bottom: 28px; max-width: 520px; }
     .hero-actions { display:flex; gap:14px; flex-wrap:wrap; margin-bottom:28px; }
     .btn-primary {
       padding: 14px 30px; background: var(--blue); color: #fff;
       border: none; border-radius: 50px; font-size: 0.9rem; font-weight: 700;
       cursor: pointer; text-decoration: none; transition: all 0.3s;
-      box-shadow: 0 6px 20px rgba(0,87,231,0.3);
+      box-shadow: 0 6px 20px rgba(0,87,231,0.5);
     }
-    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 12px 32px rgba(0,87,231,.4); background:#0048c7; }
+    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 12px 32px rgba(0,87,231,.65); background:#0048c7; }
     .btn-ghost {
-      padding: 14px 30px; background: transparent; color: var(--text);
-      border: 2px solid var(--border); border-radius: 50px; font-size: 0.9rem; font-weight: 700;
-      cursor: pointer; text-decoration: none; transition: all 0.3s;
+      padding: 14px 30px; background: rgba(255,255,255,0.1); color: #fff;
+      border: 2px solid rgba(255,255,255,0.3); border-radius: 50px; font-size: 0.9rem; font-weight: 700;
+      cursor: pointer; text-decoration: none; transition: all 0.3s; backdrop-filter: blur(4px);
     }
-    .btn-ghost:hover { border-color:var(--blue); color:var(--blue); transform:translateY(-2px); }
-    .hero-trust-line { font-size:.78rem; color:var(--text3); }
-
-    /* RIGHT visual */
-    .hero-right { position:relative; z-index:2; height:580px; }
-    .hero-img-main {
-      position:absolute; right:0; top:0; width:88%; height:100%;
-      object-fit:cover; border-radius:32px;
-      box-shadow:0 40px 80px rgba(0,40,120,0.18),0 0 0 1px rgba(0,87,231,0.08);
+    .btn-ghost:hover { border-color:rgba(255,255,255,0.7); background:rgba(255,255,255,0.2); transform:translateY(-2px); }
+    .hero-trust-line { font-size:.78rem; color:rgba(255,255,255,0.45); }
+    .hero-scroll-ind {
+      position:absolute; bottom:30px; left:50%; transform:translateX(-50%);
+      display:flex; flex-direction:column; align-items:center; gap:6px;
+      color:rgba(255,255,255,0.5); font-size:.7rem; letter-spacing:2px; text-transform:uppercase;
+      z-index:5; animation:scrollFloat 3s ease-in-out infinite;
     }
-
-    /* Floating cards */
-    .float-card {
-      position:absolute; background:#fff;
-      border:1px solid rgba(0,87,231,0.1); border-radius:18px;
-      padding:14px 18px; box-shadow:0 16px 48px rgba(0,40,120,0.14);
-      z-index:3; animation:floatCard 4s ease-in-out infinite;
-    }
-    .float-card:nth-child(2) { animation-delay:-1.5s; }
-    .float-card:nth-child(3) { animation-delay:-3s; }
-    @keyframes floatCard { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
-
-    .card-appt { left:-30px; top:80px; min-width:210px; }
-    .appt-top { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
-    .appt-icon { width:36px;height:36px;background:linear-gradient(135deg,var(--blue),var(--cyan));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0; }
-    .appt-label { font-size:.68rem;color:var(--text3);text-transform:uppercase;letter-spacing:1px; }
-    .appt-name { font-size:.85rem;font-weight:700;color:var(--text); }
-    .appt-time { font-size:.75rem;color:var(--blue);font-weight:600; }
-    .appt-bar { height:4px;background:#edf0f7;border-radius:2px;margin-top:10px; }
-    .appt-bar-fill { height:100%;width:65%;background:linear-gradient(90deg,var(--blue),var(--cyan));border-radius:2px; }
-
-    .card-rating { right:-20px;top:50%;transform:translateY(-50%);text-align:center;padding:18px 22px; }
-    .rating-num { font-size:2.2rem;font-weight:900;background:linear-gradient(135deg,var(--blue),var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1; }
-    .rating-stars { color:#f59e0b;font-size:.9rem;margin:4px 0; }
-    .rating-label { font-size:.7rem;color:var(--text3); }
-
-    .card-patients { left:10px;bottom:40px;display:flex;align-items:center;gap:12px; }
-    .patients-icon { font-size:1.6rem; }
-    .patients-num { font-size:1.3rem;font-weight:900;background:linear-gradient(135deg,var(--blue),var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent; }
-    .patients-label { font-size:.72rem;color:var(--text3); }
-
-    .hero-scroll-ind { position:absolute;bottom:30px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--text3);font-size:.7rem;letter-spacing:2px;text-transform:uppercase;z-index:5;animation:scrollFloat 3s ease-in-out infinite; }
-    .scroll-line { width:1px;height:44px;background:linear-gradient(to bottom,var(--blue),transparent); }
+    .scroll-line { width:1px;height:44px;background:linear-gradient(to bottom,rgba(255,255,255,0.5),transparent); }
     @keyframes scrollFloat { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
 
     /* ── STATS ── */
@@ -335,9 +324,8 @@
 
     /* ── RESPONSIVE ── */
     @media(max-width:1100px){
-      nav { padding:14px 28px; } .nav-links { display:none; }
-      #hero { grid-template-columns:1fr; padding:110px 28px 60px; }
-      .hero-right { display:none; }
+      nav { padding:14px 28px; } nav.nav-dark { padding:14px 28px; } .nav-links { display:none; }
+      .hero-content { padding:100px 28px 60px; }
       #stats { grid-template-columns:repeat(2,1fr); } .stat { border-right:none;border-bottom:1px solid var(--border); }
       #gallery { padding:70px 28px; } .gallery-grid { grid-template-columns:1fr 1fr;grid-template-rows:auto; }
       .gallery-item:first-child { grid-row:auto;grid-column:span 2;height:260px; } .gallery-item { height:200px; }
@@ -368,7 +356,7 @@
   <div class="cursor-ring" id="cursorRing"></div>
 
   <!-- NAV -->
-  <nav id="navbar">
+  <nav id="navbar" class="nav-dark">
     <div class="logo">Klyma<span>Dental</span></div>
     <ul class="nav-links">
       <li><a href="#gallery">Clínica</a></li>
@@ -381,45 +369,28 @@
   </nav>
 
   <!-- HERO -->
-  <section id="hero">
-    <canvas id="particles"></canvas>
+  <section id="hero-scroll">
+    <div id="hero-sticky">
+      <img id="hero-bg" src="assets/hero.jpg" alt="Klyma Dental">
+      <div class="hero-overlay"></div>
+      <div class="hero-load-bar" id="heroLoadBar"></div>
 
-    <div class="hero-left">
-      <div class="hero-badge"><div class="dot"></div>Clínica Dental Premium · Santiago</div>
-      <h1>Klyma<br><span class="hero-accent">Dental</span></h1>
-      <p class="hero-sub">Tu nueva sonrisa empieza aquí.</p>
-      <p class="hero-desc">Tecnología dental de vanguardia con especialistas certificados. Blanqueamiento láser, ortodoncia invisible, implantes y carillas en una clínica diseñada para transformar tu sonrisa. Primera consulta gratis.</p>
-      <div class="hero-actions">
-        <a href="#contact" class="btn-primary">Agendar Consulta Gratis</a>
-        <a href="#gallery" class="btn-ghost">Ver la Clínica</a>
-      </div>
-      <p class="hero-trust-line">Clínica dental premium · Santiago, Chile · +8.500 pacientes satisfechos · ⭐ 4.9 Google</p>
-    </div>
-
-    <div class="hero-right">
-      <img class="hero-img-main" src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800&q=80" alt="Klyma Dental Clínica">
-      <div class="float-card card-appt">
-        <div class="appt-top">
-          <div class="appt-icon">📅</div>
-          <div><div class="appt-label">Próxima cita</div><div class="appt-name">Dr. Andrés Vega</div></div>
+      <div class="hero-content">
+        <div class="hero-badge"><div class="dot"></div>Clínica Dental Premium · Santiago</div>
+        <h1>Klyma<br><span class="hero-accent">Dental</span></h1>
+        <p class="hero-sub">Tu nueva sonrisa empieza aquí.</p>
+        <p class="hero-desc">Tecnología dental de vanguardia con especialistas certificados. Blanqueamiento láser, ortodoncia invisible, implantes y carillas en una clínica diseñada para transformar tu sonrisa. Primera consulta gratis.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn-primary">Agendar Consulta Gratis</a>
+          <a href="#gallery" class="btn-ghost">Ver la Clínica</a>
         </div>
-        <div class="appt-time">Hoy · 14:30 hrs</div>
-        <div class="appt-bar"><div class="appt-bar-fill"></div></div>
+        <p class="hero-trust-line">Clínica dental premium · Santiago, Chile · +8.500 pacientes satisfechos · ⭐ 4.9 Google</p>
       </div>
-      <div class="float-card card-rating">
-        <div class="rating-num">4.9</div>
-        <div class="rating-stars">★★★★★</div>
-        <div class="rating-label">+2.100 reseñas Google</div>
-      </div>
-      <div class="float-card card-patients">
-        <div class="patients-icon">😊</div>
-        <div><div class="patients-num">8.500+</div><div class="patients-label">Pacientes satisfechos</div></div>
-      </div>
-    </div>
 
-    <div class="hero-scroll-ind">
-      <div class="scroll-line"></div>
-      Scroll
+      <div class="hero-scroll-ind">
+        <div class="scroll-line"></div>
+        Scroll
+      </div>
     </div>
   </section>
 
@@ -439,11 +410,11 @@
       <p class="section-sub">Instalaciones de última generación en el corazón de Santiago</p>
     </div>
     <div class="gallery-grid">
-      <div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800&q=80" alt="Interior clínica"><div class="gallery-overlay"><span>Sala de tratamiento principal</span></div></div>
-      <div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1588776814546-1ffbb4d7fa0a?w=600&q=80" alt="Equipamiento"><div class="gallery-overlay"><span>Equipo especializado</span></div></div>
-      <div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?w=600&q=80" alt="Recepción"><div class="gallery-overlay"><span>Recepción premium</span></div></div>
-      <div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1551190822-a9333d879b1f?w=600&q=80" alt="Tecnología"><div class="gallery-overlay"><span>Tecnología de vanguardia</span></div></div>
-      <div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=600&q=80" alt="Atención"><div class="gallery-overlay"><span>Atención personalizada</span></div></div>
+      <div class="gallery-item reveal"><img src="assets/gallery-1.jpg" alt="Interior clínica"><div class="gallery-overlay"><span>Sala de tratamiento principal</span></div></div>
+      <div class="gallery-item reveal"><img src="assets/gallery-2.jpg" alt="Equipamiento"><div class="gallery-overlay"><span>Recepción premium</span></div></div>
+      <div class="gallery-item reveal"><img src="assets/gallery-3.jpg" alt="Tecnología"><div class="gallery-overlay"><span>Tecnología de vanguardia</span></div></div>
+      <div class="gallery-item reveal"><img src="assets/gallery-4.jpg" alt="Atención"><div class="gallery-overlay"><span>Atención personalizada</span></div></div>
+      <div class="gallery-item reveal"><img src="assets/gallery-5.jpg" alt="Equipamiento especializado"><div class="gallery-overlay"><span>Equipamiento esterilizado</span></div></div>
     </div>
   </section>
 
@@ -457,7 +428,7 @@
     <div class="services-grid">
       <div class="service-card reveal" style="position:relative">
         <div class="card-arrow">↗</div>
-        <img class="service-img" src="https://images.unsplash.com/photo-1609840112990-4265448269a4?w=500&q=80" alt="Ortodoncia invisible">
+        <img class="service-img" src="assets/service-ortodoncia.jpg" alt="Ortodoncia invisible">
         <div class="service-body">
           <div class="service-icon">🦷</div>
           <h3>Ortodoncia Invisible</h3>
@@ -467,7 +438,7 @@
       </div>
       <div class="service-card featured reveal" style="position:relative">
         <div class="card-arrow">↗</div>
-        <img class="service-img" src="https://images.unsplash.com/photo-1606811841689-23dfddce3e8e?w=500&q=80" alt="Blanqueamiento">
+        <img class="service-img" src="assets/service-blanqueamiento.jpg" alt="Blanqueamiento">
         <div class="service-body">
           <div class="service-icon">✨</div>
           <h3>Blanqueamiento Láser</h3>
@@ -477,7 +448,7 @@
       </div>
       <div class="service-card reveal" style="position:relative">
         <div class="card-arrow">↗</div>
-        <img class="service-img" src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=500&q=80" alt="Carillas">
+        <img class="service-img" src="assets/service-carillas.jpg" alt="Carillas">
         <div class="service-body">
           <div class="service-icon">💎</div>
           <h3>Carillas de Porcelana</h3>
@@ -487,7 +458,7 @@
       </div>
       <div class="service-card reveal" style="position:relative">
         <div class="card-arrow">↗</div>
-        <img class="service-img" src="https://images.unsplash.com/photo-1588776814546-1ffbb4d7fa0a?w=500&q=80" alt="Implantes">
+        <img class="service-img" src="assets/service-implantes.jpg" alt="Implantes">
         <div class="service-body">
           <div class="service-icon">🔬</div>
           <h3>Implantes Dentales</h3>
@@ -497,7 +468,7 @@
       </div>
       <div class="service-card reveal" style="position:relative">
         <div class="card-arrow">↗</div>
-        <img class="service-img" src="https://images.unsplash.com/photo-1629909615032-e0d8f3f33c46?w=500&q=80" alt="Limpieza">
+        <img class="service-img" src="assets/service-limpieza.jpg" alt="Limpieza">
         <div class="service-body">
           <div class="service-icon">🛡️</div>
           <h3>Limpieza Profunda</h3>
@@ -507,7 +478,7 @@
       </div>
       <div class="service-card reveal" style="position:relative">
         <div class="card-arrow">↗</div>
-        <img class="service-img" src="https://images.unsplash.com/photo-1588776813677-77aaa5595cca?w=500&q=80" alt="Odontopediatría">
+        <img class="service-img" src="assets/service-pediatria.jpg" alt="Odontopediatría">
         <div class="service-body">
           <div class="service-icon">👶</div>
           <h3>Odontopediatría</h3>
@@ -522,9 +493,9 @@
   <section id="about">
     <div class="about-inner">
       <div class="about-visual reveal-left">
-        <img class="about-img-main" src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=700&q=80" alt="Clínica Klyma Dental">
-        <img class="about-img-small" src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&q=80" alt="Dentista">
-        <img class="about-img-small2" src="https://images.unsplash.com/photo-1551190822-a9333d879b1f?w=400&q=80" alt="Tecnología">
+        <img class="about-img-main" src="assets/about-main.jpg" alt="Clínica Klyma Dental">
+        <img class="about-img-small" src="assets/about-small1.jpg" alt="Dentista">
+        <img class="about-img-small2" src="assets/about-small2.jpg" alt="Tecnología">
         <div class="about-badge"><div class="num">+15</div><div class="txt">años de<br>excelencia</div></div>
       </div>
       <div class="about-content reveal-right">
@@ -553,19 +524,19 @@
     </div>
     <div class="team-grid">
       <div class="team-card reveal">
-        <img class="team-img" src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=400&q=80" alt="Dr. Andrés Vega">
+        <img class="team-img" src="assets/team-andres.jpg" alt="Dr. Andrés Vega">
         <div class="team-info"><div class="team-role">Director Médico</div><div class="team-name">Dr. Andrés Vega</div><div class="team-exp">Implantología · 18 años de exp.</div></div>
       </div>
       <div class="team-card reveal">
-        <img class="team-img" src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=400&q=80" alt="Dra. Catalina Ríos">
+        <img class="team-img" src="assets/team-catalina.jpg" alt="Dra. Catalina Ríos">
         <div class="team-info"><div class="team-role">Ortodoncista</div><div class="team-name">Dra. Catalina Ríos</div><div class="team-exp">Invisalign · 12 años de exp.</div></div>
       </div>
       <div class="team-card reveal">
-        <img class="team-img" src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&q=80" alt="Dr. Felipe Soto">
+        <img class="team-img" src="assets/team-felipe.jpg" alt="Dr. Felipe Soto">
         <div class="team-info"><div class="team-role">Estética Dental</div><div class="team-name">Dr. Felipe Soto</div><div class="team-exp">Carillas · 10 años de exp.</div></div>
       </div>
       <div class="team-card reveal">
-        <img class="team-img" src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&q=80" alt="Dra. Mariana Torres">
+        <img class="team-img" src="assets/team-mariana.jpg" alt="Dra. Mariana Torres">
         <div class="team-info"><div class="team-role">Odontopediatra</div><div class="team-name">Dra. Mariana Torres</div><div class="team-exp">Pediatría · 9 años de exp.</div></div>
       </div>
     </div>
@@ -580,7 +551,7 @@
         <p class="section-sub">Invertimos en lo mejor para que tu tratamiento sea preciso y cómodo</p>
       </div>
       <div class="tech-top">
-        <div class="tech-img-wrap reveal-left"><img src="https://images.unsplash.com/photo-1551190822-a9333d879b1f?w=800&q=80" alt="Tecnología dental"></div>
+        <div class="tech-img-wrap reveal-left"><img src="assets/tech-main.jpg" alt="Tecnología dental"></div>
         <div class="tech-list reveal-right">
           <div class="tech-item"><div class="tech-item-icon">🖥️</div><div><h3>Escáner 3D Intraoral</h3><p>Mapeo digital de tu boca en segundos. Sin moldes incómodos.</p></div></div>
           <div class="tech-item"><div class="tech-item-icon">📡</div><div><h3>Radiografía Digital</h3><p>90% menos radiación con imágenes HD al instante.</p></div></div>
@@ -606,17 +577,17 @@
     </div>
     <div class="results-grid">
       <div class="result-card reveal">
-        <div class="result-imgs"><img src="https://images.unsplash.com/photo-1563291074-2bf8677ac0e5?w=300&q=80" alt="Antes"><img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e8e?w=300&q=80" alt="Después"></div>
+        <div class="result-imgs"><img src="assets/result-blanq-antes.jpg" alt="Antes"><img src="assets/result-blanq-despues.jpg" alt="Después"></div>
         <div class="result-divider"></div><div class="result-label">VS</div>
         <div class="result-info"><h4>Blanqueamiento Láser</h4><p>8 tonos más blanco · 1 sesión · 60 min</p></div>
       </div>
       <div class="result-card reveal">
-        <div class="result-imgs"><img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?w=300&q=80" alt="Antes"><img src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=300&q=80" alt="Después"></div>
+        <div class="result-imgs"><img src="assets/result-carillas-antes.jpg" alt="Antes"><img src="assets/result-carillas-despues.jpg" alt="Después"></div>
         <div class="result-divider"></div><div class="result-label">VS</div>
         <div class="result-info"><h4>Carillas de Porcelana</h4><p>Transformación completa · 2 sesiones</p></div>
       </div>
       <div class="result-card reveal">
-        <div class="result-imgs"><img src="https://images.unsplash.com/photo-1609840112990-4265448269a4?w=300&q=80" alt="Antes"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=300&q=80" alt="Después"></div>
+        <div class="result-imgs"><img src="assets/result-ortod-antes.jpg" alt="Antes"><img src="assets/result-ortod-despues.jpg" alt="Después"></div>
         <div class="result-divider"></div><div class="result-label">VS</div>
         <div class="result-info"><h4>Ortodoncia Invisible</h4><p>12 meses · Sin brackets visibles</p></div>
       </div>
@@ -633,17 +604,17 @@
       <div class="testimonial-card reveal">
         <div class="stars">★★★★★</div>
         <p class="testimonial-text">"Me hicieron las carillas y quedé absolutamente encantada. El resultado es natural y precioso. El equipo explica todo con mucha paciencia."</p>
-        <div class="testimonial-author"><img class="author-avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80" alt=""><div><div class="author-name">Valentina Morales</div><div class="author-role">Carillas de Porcelana</div></div></div>
+        <div class="testimonial-author"><img class="author-avatar" src="assets/avatar-valentina.jpg" alt=""><div><div class="author-name">Valentina Morales</div><div class="author-role">Carillas de Porcelana</div></div></div>
       </div>
       <div class="testimonial-card reveal">
         <div class="stars">★★★★★</div>
         <p class="testimonial-text">"Llevaba años con miedo al dentista. En Klyma me trataron con tanta paciencia que ya no le tengo miedo. El blanqueamiento quedó increíble."</p>
-        <div class="testimonial-author"><img class="author-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt=""><div><div class="author-name">Carlos Rodríguez</div><div class="author-role">Blanqueamiento Láser</div></div></div>
+        <div class="testimonial-author"><img class="author-avatar" src="assets/avatar-carlos.jpg" alt=""><div><div class="author-name">Carlos Rodríguez</div><div class="author-role">Blanqueamiento Láser</div></div></div>
       </div>
       <div class="testimonial-card reveal">
         <div class="stars">★★★★★</div>
         <p class="testimonial-text">"El implante fue mucho mejor de lo esperado. Sin dolor, recuperación rápida y no lo distingo del diente natural. ¡100% recomendado!"</p>
-        <div class="testimonial-author"><img class="author-avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80" alt=""><div><div class="author-name">Andrea López</div><div class="author-role">Implante Dental</div></div></div>
+        <div class="testimonial-author"><img class="author-avatar" src="assets/avatar-andrea.jpg" alt=""><div><div class="author-name">Andrea López</div><div class="author-role">Implante Dental</div></div></div>
       </div>
     </div>
   </section>
@@ -712,37 +683,26 @@
   </footer>
 
   <script>
-  /* Three.js particles */
+  /* ── HERO IMAGE PARALLAX ── */
   (() => {
-    const canvas = document.getElementById('particles');
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(60, innerWidth / innerHeight, .1, 200);
-    camera.position.z = 30;
-    const geo = new THREE.BufferGeometry();
-    const count = 1400;
-    const pos = new Float32Array(count * 3);
-    for (let i = 0; i < count * 3; i++) pos[i] = (Math.random() - .5) * 80;
-    geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-    const mat = new THREE.PointsMaterial({ color: 0x0057e7, size: .22, transparent: true, opacity: .35 });
-    const pts = new THREE.Points(geo, mat);
-    scene.add(pts);
-    const hero = document.getElementById('hero');
-    const resize = () => { renderer.setSize(hero.offsetWidth, hero.offsetHeight); camera.aspect = hero.offsetWidth / hero.offsetHeight; camera.updateProjectionMatrix(); };
-    resize(); window.addEventListener('resize', resize);
-    (function tick() { requestAnimationFrame(tick); pts.rotation.y += .0006; pts.rotation.x += .0003; renderer.render(scene, camera); })();
+    const heroImg = document.getElementById('hero-bg');
+    const heroScrollEl = document.getElementById('hero-scroll');
+    window.addEventListener('scroll', () => {
+      const scrolled = -heroScrollEl.getBoundingClientRect().top;
+      const range = heroScrollEl.offsetHeight - window.innerHeight;
+      const progress = Math.min(1, Math.max(0, scrolled / range));
+      heroImg.style.transform = `scale(${1 + progress * 0.12}) translateY(${progress * -6}%)`;
+    }, {passive: true});
   })();
 
   /* GSAP */
   gsap.registerPlugin(ScrollTrigger);
-  gsap.from('.hero-badge',    {opacity:0,y:24,duration:.7,delay:.3});
-  gsap.from('h1',             {opacity:0,y:48,duration:1,delay:.5,ease:'power3.out'});
-  gsap.from('.hero-sub',      {opacity:0,y:24,duration:.8,delay:.75});
-  gsap.from('.hero-actions',  {opacity:0,y:24,duration:.8,delay:.95});
-  gsap.from('.hero-trust-line',{opacity:0,y:20,duration:.7,delay:1.15});
-  gsap.from('.hero-img-main', {opacity:0,x:60,duration:1.1,delay:.4,ease:'power3.out'});
-  gsap.from('.float-card',    {opacity:0,scale:.85,duration:.7,delay:1.1,stagger:.15,ease:'back.out(1.4)'});
+  gsap.from('.hero-badge',     {opacity:0,y:24,duration:.7,delay:.4});
+  gsap.from('h1',              {opacity:0,y:48,duration:1,delay:.6,ease:'power3.out'});
+  gsap.from('.hero-sub',       {opacity:0,y:24,duration:.8,delay:.85});
+  gsap.from('.hero-desc',      {opacity:0,y:20,duration:.8,delay:1});
+  gsap.from('.hero-actions',   {opacity:0,y:24,duration:.8,delay:1.1});
+  gsap.from('.hero-trust-line',{opacity:0,y:20,duration:.7,delay:1.3});
 
   gsap.utils.toArray('.reveal').forEach(el=>{
     gsap.fromTo(el,{opacity:0,y:44},{opacity:1,y:0,duration:.9,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 87%',toggleActions:'play none none none'}});
@@ -767,10 +727,14 @@
     gsap.to(img,{yPercent:-8,ease:'none',scrollTrigger:{trigger:img.parentElement,scrub:1.5}});
   });
 
-  /* Nav scrolled state */
-  window.addEventListener('scroll',()=>{
-    document.getElementById('navbar').classList.toggle('scrolled', scrollY > 60);
-  });
+  /* Nav: dark over video hero, white after */
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    const hs = document.getElementById('hero-scroll');
+    const pastHero = scrollY > hs.offsetTop + hs.offsetHeight - window.innerHeight;
+    nav.classList.toggle('scrolled', pastHero);
+    nav.classList.toggle('nav-dark', !pastHero);
+  }, {passive: true});
 
   /* CURSOR */
   const cursor=document.getElementById('cursor');
